@@ -19,5 +19,7 @@ namespace CVOnline.Models
         public string Transcripts { get; set; }
         public string Diploma { get; set; }
         public string Certificate { get; set; }
+
+        public Applicant Applicant { get; set; }
     }
 }

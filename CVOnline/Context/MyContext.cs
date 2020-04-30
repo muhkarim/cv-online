@@ -32,9 +32,47 @@ namespace CVOnline.Context
                 .WithMany(x => x.UserRoles)
                 .HasForeignKey(x => x.Role_Id);
 
+            // 1 only 1 applicant : document
+            modelBuilder.Entity<Applicant>()
+                .HasOne<Document>(x => x.Document)
+                .WithOne(x => x.Applicant)
+                .HasForeignKey<Applicant>(x => x.Document_Id);
 
+            // 1 only 1 applicant : education
+            modelBuilder.Entity<Applicant>()
+                .HasOne<EducationalDetails>(x => x.EducationalDetails)
+                .WithOne(x => x.Applicant)
+                .HasForeignKey<Applicant>(x => x.EducationalDetails_Id);
 
+            //1 only 1 applicant: biodata
+            modelBuilder.Entity<Applicant>()
+                .HasOne<Biodata>(x => x.Biodata)
+                .WithOne(x => x.Applicant)
+                .HasForeignKey<Applicant>(x => x.Biodata_Id);
 
+            //1:1 Applicant : User
+            modelBuilder.Entity<Applicant>()
+                .HasOne<User>(x => x.User)
+                .WithOne(x => x.Applicant)
+                .HasForeignKey<Applicant>(x => x.User_Id);
+
+            modelBuilder.Entity<Applicant>().HasKey(x => new { x.WorkExperience_Id});
+            modelBuilder.Entity<Applicant>()
+                .HasOne(x => x.WorkExperience)
+                .WithMany(x => x.Applicants)
+                .HasForeignKey(x => x.WorkExperience_Id);
+
+            modelBuilder.Entity<UserRequest>().HasKey(x => new { x.Applicants_Id, x.RequestApplication_Id });
+            modelBuilder.Entity<UserRequest>()
+                .HasOne(x => x.Applicant)
+                .WithMany(x => x.UserRequests)
+                .HasForeignKey(x => x.Applicants_Id);
+
+            // 1 to Many Request : List
+            modelBuilder.Entity<UserRequest>()
+                .HasOne(x => x.RequestApplication)
+                .WithMany(x => x.UserRequests)
+                .HasForeignKey(x => x.RequestApplication_Id);
         }
     }
 }

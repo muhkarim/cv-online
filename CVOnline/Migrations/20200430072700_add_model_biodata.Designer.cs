@@ -4,14 +4,16 @@ using CVOnline.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CVOnline.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20200430072700_add_model_biodata")]
+    partial class add_model_biodata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +23,9 @@ namespace CVOnline.Migrations
 
             modelBuilder.Entity("CVOnline.Models.Applicant", b =>
                 {
-                    b.Property<int>("WorkExperience_Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Biodata_Id");
 
@@ -29,11 +33,7 @@ namespace CVOnline.Migrations
 
                     b.Property<int>("EducationalDetails_Id");
 
-                    b.Property<int>("Id");
-
-                    b.Property<int>("User_Id");
-
-                    b.HasKey("WorkExperience_Id");
+                    b.HasKey("Id");
 
                     b.HasIndex("Biodata_Id")
                         .IsUnique();
@@ -42,9 +42,6 @@ namespace CVOnline.Migrations
                         .IsUnique();
 
                     b.HasIndex("EducationalDetails_Id")
-                        .IsUnique();
-
-                    b.HasIndex("User_Id")
                         .IsUnique();
 
                     b.ToTable("TB_M_Applicants");
@@ -148,27 +145,6 @@ namespace CVOnline.Migrations
                     b.ToTable("TB_M_Jobs");
                 });
 
-            modelBuilder.Entity("CVOnline.Models.RequestApplication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreateDate");
-
-                    b.Property<int?>("JobsId");
-
-                    b.Property<int>("Jobs_Id");
-
-                    b.Property<bool>("Status");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JobsId");
-
-                    b.ToTable("TB_T_RequestApplication");
-                });
-
             modelBuilder.Entity("CVOnline.Models.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -197,23 +173,6 @@ namespace CVOnline.Migrations
                     b.ToTable("TB_M_Users");
                 });
 
-            modelBuilder.Entity("CVOnline.Models.UserRequest", b =>
-                {
-                    b.Property<int>("Applicants_Id");
-
-                    b.Property<int>("RequestApplication_Id");
-
-                    b.Property<int>("Id");
-
-                    b.HasKey("Applicants_Id", "RequestApplication_Id");
-
-                    b.HasAlternateKey("Id");
-
-                    b.HasIndex("RequestApplication_Id");
-
-                    b.ToTable("TB_T_UserRequest");
-                });
-
             modelBuilder.Entity("CVOnline.Models.UserRole", b =>
                 {
                     b.Property<int>("User_Id");
@@ -225,29 +184,6 @@ namespace CVOnline.Migrations
                     b.HasIndex("Role_Id");
 
                     b.ToTable("TB_M_UserRole");
-                });
-
-            modelBuilder.Entity("CVOnline.Models.WorkExperience", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("CompanyName");
-
-                    b.Property<string>("LastPosition");
-
-                    b.Property<string>("LastSalary");
-
-                    b.Property<string>("TypeOfBussiness");
-
-                    b.Property<string>("YearOfResign");
-
-                    b.Property<string>("YearStartedWorking");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TB_M_WorkExperience");
                 });
 
             modelBuilder.Entity("CVOnline.Models.Applicant", b =>
@@ -265,36 +201,6 @@ namespace CVOnline.Migrations
                     b.HasOne("CVOnline.Models.EducationalDetails", "EducationalDetails")
                         .WithOne("Applicant")
                         .HasForeignKey("CVOnline.Models.Applicant", "EducationalDetails_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CVOnline.Models.User", "User")
-                        .WithOne("Applicant")
-                        .HasForeignKey("CVOnline.Models.Applicant", "User_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CVOnline.Models.WorkExperience", "WorkExperience")
-                        .WithMany("Applicants")
-                        .HasForeignKey("WorkExperience_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CVOnline.Models.RequestApplication", b =>
-                {
-                    b.HasOne("CVOnline.Models.Job", "Jobs")
-                        .WithMany()
-                        .HasForeignKey("JobsId");
-                });
-
-            modelBuilder.Entity("CVOnline.Models.UserRequest", b =>
-                {
-                    b.HasOne("CVOnline.Models.Applicant", "Applicant")
-                        .WithMany("UserRequests")
-                        .HasForeignKey("Applicants_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CVOnline.Models.RequestApplication", "RequestApplication")
-                        .WithMany("UserRequests")
-                        .HasForeignKey("RequestApplication_Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
