@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CVOnline.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200430082657_add_model_WorkExperience")]
+    [Migration("20200430091553_add_model_WorkExperience")]
     partial class add_model_WorkExperience
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,9 @@ namespace CVOnline.Migrations
 
             modelBuilder.Entity("CVOnline.Models.Applicant", b =>
                 {
-                    b.Property<int>("WorkExperience_Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Biodata_Id");
 
@@ -31,11 +33,11 @@ namespace CVOnline.Migrations
 
                     b.Property<int>("EducationalDetails_Id");
 
-                    b.Property<int>("Id");
-
                     b.Property<int>("User_Id");
 
-                    b.HasKey("WorkExperience_Id");
+                    b.Property<int>("WorkExperience_Id");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("Biodata_Id")
                         .IsUnique();
@@ -47,6 +49,9 @@ namespace CVOnline.Migrations
                         .IsUnique();
 
                     b.HasIndex("User_Id")
+                        .IsUnique();
+
+                    b.HasIndex("WorkExperience_Id")
                         .IsUnique();
 
                     b.ToTable("TB_M_Applicants");
@@ -275,8 +280,8 @@ namespace CVOnline.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CVOnline.Models.WorkExperience", "WorkExperience")
-                        .WithMany("Applicants")
-                        .HasForeignKey("WorkExperience_Id")
+                        .WithOne("Applicant")
+                        .HasForeignKey("CVOnline.Models.Applicant", "WorkExperience_Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -17,7 +17,7 @@ namespace CVOnline.Models
         public string Password { get; set; }
 
 
-        //public Admin Admin { get; set; }
+        public Admin Admin { get; set; }
         public Applicant Applicant { get; set; }
         public IList<UserRole> UserRoles { get; set; } //collection navigation property
 
