@@ -14,7 +14,13 @@ namespace CVOnline.Context
         public DbSet<Job> Jobs { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
-
+        public DbSet<Applicant> Applicants { get; set; }
+        public DbSet<Biodata> Biodatas { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<EducationalDetails> EducationalDetails { get; set; }
+        public DbSet<UserRequest> UserRequests { get; set; }
+        public DbSet<WorkExperience> WorkExperiences { get; set; }
+        public DbSet<RequestApplication> RequestApplications { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
