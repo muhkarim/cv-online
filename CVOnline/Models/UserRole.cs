@@ -15,7 +15,6 @@ namespace CVOnline.Models
 
         public int Role_Id { get; set; } // foreign key
         public Role Role { get; set; } // reference navigation property
-
-
+        
     }
 }
