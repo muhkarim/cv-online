@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CVOnline.Context
 {
-    public class MyContext : DbContext 
+    public class MyContext : DbContext
     {
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
@@ -22,10 +22,7 @@ namespace CVOnline.Context
         public DbSet<WorkExperience> WorkExperiences { get; set; }
         public DbSet<RequestApplication> RequestApplications { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
-<<<<<<< HEAD
-=======
         public DbSet<Admin> Admins { get; set; }
->>>>>>> master
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -66,19 +63,11 @@ namespace CVOnline.Context
                 .WithOne(x => x.Applicant)
                 .HasForeignKey<Applicant>(x => x.User_Id);
 
-<<<<<<< HEAD
-            modelBuilder.Entity<Applicant>().HasKey(x => new { x.WorkExperience_Id});
-            modelBuilder.Entity<Applicant>()
-                .HasOne(x => x.WorkExperience)
-                .WithMany(x => x.Applicants)
-                .HasForeignKey(x => x.WorkExperience_Id);
-=======
             //1:1 Admin : User
             modelBuilder.Entity<Admin>()
                 .HasOne<User>(x => x.User)
                 .WithOne(x => x.Admin)
                 .HasForeignKey<Admin>(x => x.User_Id);
->>>>>>> master
 
             modelBuilder.Entity<UserRequest>().HasKey(x => new { x.Applicants_Id, x.RequestApplication_Id });
             modelBuilder.Entity<UserRequest>()
@@ -91,15 +80,12 @@ namespace CVOnline.Context
                 .HasOne(x => x.RequestApplication)
                 .WithMany(x => x.UserRequests)
                 .HasForeignKey(x => x.RequestApplication_Id);
-<<<<<<< HEAD
-=======
 
             modelBuilder.Entity<Applicant>()
                 .HasOne<WorkExperience>(x => x.WorkExperience)
                 .WithOne(x => x.Applicant)
                 .HasForeignKey<Applicant>(x => x.WorkExperience_Id);
 
->>>>>>> master
         }
     }
 }
