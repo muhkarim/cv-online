@@ -4,14 +4,16 @@ using CVOnline.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CVOnline.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20200430091553_add_model_WorkExperience")]
+    partial class add_model_WorkExperience
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,49 +21,11 @@ namespace CVOnline.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-<<<<<<< HEAD
-            modelBuilder.Entity("CVOnline.Models.Applicant", b =>
-                {
-                    b.Property<int>("WorkExperience_Id");
-=======
-            modelBuilder.Entity("CVOnline.Models.Admin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address");
-
-                    b.Property<DateTime>("BirthDate");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("Gender");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("PlaceOfBirth");
-
-                    b.Property<string>("Religion");
-
-                    b.Property<int>("User_Id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("User_Id")
-                        .IsUnique();
-
-                    b.ToTable("TB_M_Admin");
-                });
-
             modelBuilder.Entity("CVOnline.Models.Applicant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
->>>>>>> master
 
                     b.Property<int>("Biodata_Id");
 
@@ -69,19 +33,11 @@ namespace CVOnline.Migrations
 
                     b.Property<int>("EducationalDetails_Id");
 
-<<<<<<< HEAD
-                    b.Property<int>("Id");
-
-                    b.Property<int>("User_Id");
-
-                    b.HasKey("WorkExperience_Id");
-=======
                     b.Property<int>("User_Id");
 
                     b.Property<int>("WorkExperience_Id");
 
                     b.HasKey("Id");
->>>>>>> master
 
                     b.HasIndex("Biodata_Id")
                         .IsUnique();
@@ -95,12 +51,9 @@ namespace CVOnline.Migrations
                     b.HasIndex("User_Id")
                         .IsUnique();
 
-<<<<<<< HEAD
-=======
                     b.HasIndex("WorkExperience_Id")
                         .IsUnique();
 
->>>>>>> master
                     b.ToTable("TB_M_Applicants");
                 });
 
@@ -304,17 +257,6 @@ namespace CVOnline.Migrations
                     b.ToTable("TB_M_WorkExperience");
                 });
 
-<<<<<<< HEAD
-=======
-            modelBuilder.Entity("CVOnline.Models.Admin", b =>
-                {
-                    b.HasOne("CVOnline.Models.User", "User")
-                        .WithOne("Admin")
-                        .HasForeignKey("CVOnline.Models.Admin", "User_Id")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
->>>>>>> master
             modelBuilder.Entity("CVOnline.Models.Applicant", b =>
                 {
                     b.HasOne("CVOnline.Models.Biodata", "Biodata")
@@ -338,13 +280,8 @@ namespace CVOnline.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CVOnline.Models.WorkExperience", "WorkExperience")
-<<<<<<< HEAD
-                        .WithMany("Applicants")
-                        .HasForeignKey("WorkExperience_Id")
-=======
                         .WithOne("Applicant")
                         .HasForeignKey("CVOnline.Models.Applicant", "WorkExperience_Id")
->>>>>>> master
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

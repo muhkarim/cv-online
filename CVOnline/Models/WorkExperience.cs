@@ -20,6 +20,10 @@ namespace CVOnline.Models
         public string YearOfResign { get; set; }
         public string LastSalary { get; set; }
 
+<<<<<<< HEAD
         public IList<Applicant> Applicants { get; set; }
+=======
+        public Applicant Applicant { get; set; }
+>>>>>>> master
     }
 }
