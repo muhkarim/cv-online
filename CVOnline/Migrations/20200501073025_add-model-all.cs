@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CVOnline.Migrations
 {
-    public partial class add_model_all : Migration
+    public partial class addmodelall : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,8 +211,7 @@ namespace CVOnline.Migrations
                     EducationalDetails_Id = table.Column<int>(nullable: false),
                     Biodata_Id = table.Column<int>(nullable: false),
                     User_Id = table.Column<int>(nullable: false),
-                    WorkExperience_Id = table.Column<int>(nullable: false),
-                    WorkExperienceId1 = table.Column<int>(nullable: true)
+                    WorkExperience_Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,12 +240,6 @@ namespace CVOnline.Migrations
                         principalTable: "TB_M_Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TB_M_Applicants_TB_M_WorkExperience_WorkExperienceId1",
-                        column: x => x.WorkExperienceId1,
-                        principalTable: "TB_M_WorkExperience",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_TB_M_Applicants_TB_M_WorkExperience_WorkExperience_Id",
                         column: x => x.WorkExperience_Id,
@@ -310,11 +303,6 @@ namespace CVOnline.Migrations
                 table: "TB_M_Applicants",
                 column: "User_Id",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TB_M_Applicants_WorkExperienceId1",
-                table: "TB_M_Applicants",
-                column: "WorkExperienceId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TB_M_Applicants_WorkExperience_Id",

@@ -65,8 +65,6 @@ namespace CVOnline.Migrations
 
                     b.Property<int>("User_Id");
 
-                    b.Property<int?>("WorkExperienceId1");
-
                     b.Property<int>("WorkExperience_Id");
 
                     b.HasKey("Id");
@@ -82,8 +80,6 @@ namespace CVOnline.Migrations
 
                     b.HasIndex("User_Id")
                         .IsUnique();
-
-                    b.HasIndex("WorkExperienceId1");
 
                     b.HasIndex("WorkExperience_Id")
                         .IsUnique();
@@ -320,10 +316,6 @@ namespace CVOnline.Migrations
                         .WithOne("Applicant")
                         .HasForeignKey("CVOnline.Models.Applicant", "User_Id")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CVOnline.Models.WorkExperience")
-                        .WithMany("Applicants")
-                        .HasForeignKey("WorkExperienceId1");
 
                     b.HasOne("CVOnline.Models.WorkExperience", "WorkExperience")
                         .WithOne("Applicant")

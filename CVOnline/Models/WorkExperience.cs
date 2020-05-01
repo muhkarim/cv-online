@@ -20,8 +20,6 @@ namespace CVOnline.Models
         public string YearOfResign { get; set; }
         public string LastSalary { get; set; }
 
-        public IList<Applicant> Applicants { get; set; }
-
         public Applicant Applicant { get; set; }
 
     }

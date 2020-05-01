@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20200430075636_add_model_workexperience.cs" />
     <Compile Remove="Migrations\20200430075636_add_model_workexperience.Designer.cs" />
+    <Compile Remove="Migrations\20200501065725_add_model_all.cs" />
+    <Compile Remove="Migrations\20200501065725_add_model_all.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
