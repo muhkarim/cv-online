@@ -23,7 +23,7 @@ namespace CVOnline.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BasesController<User, UserRepository>
     {
         private readonly UserRepository _userRepository;
         private readonly RoleRepository _roleRepository;
@@ -32,7 +32,7 @@ namespace CVOnline.Controllers
         DynamicParameters parameters = new DynamicParameters();
 
 
-        public UsersController(UserRepository userRepository, RoleRepository roleRepository, IConfiguration configuration)
+        public UsersController(UserRepository userRepository, RoleRepository roleRepository, IConfiguration configuration) : base(userRepository)
         {
             this._roleRepository = roleRepository;
             this._userRepository = userRepository;
@@ -139,6 +139,20 @@ namespace CVOnline.Controllers
             }
 
         }
+
+        //[HttpGet]
+        //public async Task<IEnumerable<UserVM>> Get() 
+        //{
+        //    return await _userRepository.Get();
+        //}
+
+        //[HttpGet("id")]
+        //public async Task<IEnumerable<UserVM>> GetById(int id)
+        //{
+        //    return await _userRepository.GetById(id);
+        //}
+
+
 
 
 

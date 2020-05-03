@@ -11,13 +11,7 @@ namespace CVOnline.Repositories.Data
 {
     public class EducationalDetailsRepository : GeneralRepository<EducationalDetails, MyContext>
     {
-        DynamicParameters parameters = new DynamicParameters();
-        IConfiguration _configuration { get; }
-
-        public EducationalDetailsRepository(MyContext myContext, IConfiguration configuration) : base(myContext)
-        {
-            _configuration = configuration;
-        }
+        public EducationalDetailsRepository(MyContext myContext) : base(myContext) { }
 
     }
 }

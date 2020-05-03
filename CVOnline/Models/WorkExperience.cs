@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CVOnline.Models
 {
     [Table("TB_M_WorkExperience")]
-    public class WorkExperience
+    public class WorkExperience : IEntity
     {
         [Key]
         public int Id { get; set; }

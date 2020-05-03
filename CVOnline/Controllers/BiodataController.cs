@@ -12,12 +12,11 @@ namespace CVOnline.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EducationalDetailsController : BasesController<EducationalDetails, EducationalDetailsRepository>
+    public class BiodataController : BasesController<Biodata, BiodataRepository>
     {
-        public EducationalDetailsController(EducationalDetailsRepository educationalDetailsRepository) : base(educationalDetailsRepository)
+        public BiodataController(BiodataRepository biodataRepository) : base(biodataRepository)
         {
 
         }
-
     }
 }

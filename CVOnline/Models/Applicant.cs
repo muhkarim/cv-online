@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVOnline.Bases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace CVOnline.Models
 {
     [Table("TB_M_Applicants")]
 
-    public class Applicant
+    public class Applicant : IEntity
     {
         public int Id { get; set; }
 

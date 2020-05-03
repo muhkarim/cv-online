@@ -38,6 +38,12 @@ namespace CVOnline
             services.AddScoped<JobRepository>();
             services.AddScoped<UserRepository>();
             services.AddScoped<RoleRepository>();
+            services.AddScoped<EducationalDetailsRepository>();
+            services.AddScoped<BiodataRepository>();
+            services.AddScoped<WorkExperienceRepository>();
+            services.AddScoped<DocumentRepository>();
+            services.AddScoped<ApplicantRepository>();
+
 
 
 

@@ -10,6 +10,6 @@ namespace CVOnline.ViewModels
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int Role_Id { get; set; }
+        //public int Role_Id { get; set; }
     }
 }
