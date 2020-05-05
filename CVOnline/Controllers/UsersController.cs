@@ -23,7 +23,7 @@ namespace CVOnline.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : BasesController<User, UserRepository>
+    public class UsersController : ControllerBase
     {
         private readonly UserRepository _userRepository;
         private readonly RoleRepository _roleRepository;
@@ -32,7 +32,7 @@ namespace CVOnline.Controllers
         DynamicParameters parameters = new DynamicParameters();
 
 
-        public UsersController(UserRepository userRepository, RoleRepository roleRepository, IConfiguration configuration) : base(userRepository)
+        public UsersController(UserRepository userRepository, RoleRepository roleRepository, IConfiguration configuration)
         {
             this._roleRepository = roleRepository;
             this._userRepository = userRepository;
@@ -53,11 +53,11 @@ namespace CVOnline.Controllers
             {
                 User user = new User();
 
-                var myPassword = model.Password;
-                var salt = BCryptHelper.GenerateSalt(12);
+                var mypass = model.Password;
+                var mysalt = BCryptHelper.GenerateSalt(12);
 
                 user.Email = model.Email;
-                user.Password = BCryptHelper.HashPassword(myPassword, salt);
+                user.Password = BCryptHelper.HashPassword(mypass, mysalt);
 
                 var result = await _userRepository.PostAsync(user);
 
@@ -82,7 +82,7 @@ namespace CVOnline.Controllers
         [Route("Login")]
         public async Task<ActionResult> Login(LoginViewModel model) 
         {
-            var getEmail = _userRepository.GetByEmail(model.Email);
+            var getEmail =  _userRepository.GetByEmail(model.Email);
 
             if (getEmail == null)
             {
@@ -100,7 +100,6 @@ namespace CVOnline.Controllers
                 else 
                 {
                     // get role from user login
-                    // create sp to get role name
                     using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
                     {
                         var procName = "SP_GetRole";
@@ -129,7 +128,7 @@ namespace CVOnline.Controllers
                       issuer: _configuration["Jwt:Site"],
                       audience: _configuration["Jwt:Site"],
                       claims,
-                      expires: DateTime.UtcNow.AddDays(1),
+                      expires: DateTime.UtcNow.AddDays(3),
                       signingCredentials: new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
                     );
 
@@ -140,17 +139,73 @@ namespace CVOnline.Controllers
 
         }
 
-        //[HttpGet]
-        //public async Task<IEnumerable<UserVM>> Get() 
-        //{
-        //    return await _userRepository.Get();
-        //}
 
-        //[HttpGet("id")]
-        //public async Task<IEnumerable<UserVM>> GetById(int id)
-        //{
-        //    return await _userRepository.GetById(id);
-        //}
+       
+        [HttpGet]
+        public async Task<IEnumerable<UserVM>> Get()
+        {
+            return await _userRepository.Get();
+        }
+
+        
+        [HttpGet("{id}")]
+        public async Task<IEnumerable<UserVM>> Get(int id)
+        {
+            return await _userRepository.Get(id);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Edit(int id, User model)
+        {
+            if (model.Email != null || model.Password != null)
+            {
+                var user = await _userRepository.GetAsync(id);
+                
+                if (model.Password != user.Password)
+                {
+                    var newPass = model.Password; // new password
+                    var salt = BCryptHelper.GenerateSalt(12);
+
+                    user.Email = model.Email;
+                    user.Password = BCryptHelper.HashPassword(newPass, salt); // change to new password
+
+                    await _userRepository.PutAsync(user);
+                }
+
+                return Ok("Success updated password!");
+            }
+
+            return BadRequest("Failed to update password!");
+           
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> Delete(int id)
+        {
+            return await _userRepository.DeleteAsync(id);
+        }
+
+
+        [HttpPut]
+        [Route("ForgotPassword")]
+        public async Task<ActionResult> ForgotPassword(User model) 
+        {
+            var user = _userRepository.GetByEmail(model.Email);
+
+            var mypass = model.Password;
+            var mysalt = BCryptHelper.GenerateSalt(12);
+            user.Password = BCryptHelper.HashPassword(mypass, mysalt);
+
+            var result = await _userRepository.PutAsync(user);
+
+            if(result != null) 
+            {
+                return Ok("Reset Password Succesfully!");
+            }
+
+            return BadRequest("Failed to update password");
+
+        }
 
 
 

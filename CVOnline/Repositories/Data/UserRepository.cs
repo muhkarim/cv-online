@@ -31,28 +31,28 @@ namespace CVOnline.Repositories.Data
         }
 
 
-        //// Get All Users
-        //public async Task<IEnumerable<UserVM>> Get()
-        //{
-        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
-        //    {
-        //        var spName = "SP_GetAll_Users";
-        //        var data = await connection.QueryAsync<UserVM>(spName, commandType: CommandType.StoredProcedure);
-        //        return data;
-        //    }
-        //}
+        // Get All Users
+        public async Task<IEnumerable<UserVM>> Get()
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_GetAll_Users";
+                var data = await connection.QueryAsync<UserVM>(spName, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
 
-        //// GetById
-        //public async Task<IEnumerable<UserVM>> GetById(int id) 
-        //{
-        //    using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
-        //    {
-        //        var spName = "SP_GetById_Users";
-        //        parameters.Add("@id", id);
-        //        var data = await connection.QueryAsync<UserVM>(spName, parameters, commandType: CommandType.StoredProcedure);
-        //        return data;
-        //    }
-        //}
+        // GetById
+        public async Task<IEnumerable<UserVM>> Get(int id)
+        {
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("MyConnection")))
+            {
+                var spName = "SP_GetById_Users";
+                parameters.Add("@id", id);
+                var data = await connection.QueryAsync<UserVM>(spName, parameters, commandType: CommandType.StoredProcedure);
+                return data;
+            }
+        }
 
 
 
