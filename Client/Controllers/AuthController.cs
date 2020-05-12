@@ -42,32 +42,30 @@ namespace Client.Controllers
 
             if (result.IsSuccessStatusCode)
             {
-                //var data = result.Content.ReadAsStringAsync().Result;
-                //var handler = new JwtSecurityTokenHandler();
-                //var datajson = handler.ReadJwtToken(data);
+                var data = result.Content.ReadAsStringAsync().Result;
+                var handler = new JwtSecurityTokenHandler();
+                var datajson = handler.ReadJwtToken(data);
 
-                //// get token
-                //string token = "Bearer " + data;
-                //string role = datajson.Claims.First(claim => claim.Type == "Role").Value;
-                //string email = datajson.Claims.First(claim => claim.Type == "Email").Value;
+                // get token
+                string token = "Bearer " + data;
+                string role = datajson.Claims.First(claim => claim.Type == "RoleName").Value;
+                string email = datajson.Claims.First(claim => claim.Type == "Email").Value;
+                string user_id = datajson.Claims.First(claim => claim.Type == "User_Id").Value;
 
-                ////set token
-                //HttpContext.Session.SetString("JWTToken", token);
-                //HttpContext.Session.SetString("Role", role);
-                //HttpContext.Session.SetString("Email", email);
+                //set token
+                HttpContext.Session.SetString("JWTToken", token);
+                HttpContext.Session.SetString("Role", role);
+                HttpContext.Session.SetString("Email", email);
+                HttpContext.Session.SetString("User_Id", user_id);
 
-                //if (role == "Admin")
-                //{
-                //    return RedirectToAction("Index", "Users");
-                //}
-                //else
-                //{
-                //    return RedirectToAction("Index", "Jobs"); 
-                //}
-
-                return RedirectToAction("Index", "Users");
-
-
+                if (role == "Admin")
+                {
+                    return RedirectToAction("Index", "Jobs");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "UserApplicants"); // homepage user
+                }
 
             }
             else
@@ -142,7 +140,7 @@ namespace Client.Controllers
             MailMessage mm = new MailMessage(from, to);
             string today = DateTime.Now.ToString();
             mm.Subject = message + " (" + today + ")";
-            mm.Body = string.Format("Hi {0},<br /><br />Your password is: <br />{1}<br /><br />Thank You.", userVM.Email, userVM.Password);
+            mm.Body = string.Format("Hi {0},<br /><br />Your password is: <br />{1}<br /><br />", userVM.Email, userVM.Password);
             mm.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
             smtp.Host = "smtp.gmail.com";
@@ -159,7 +157,24 @@ namespace Client.Controllers
         }
 
 
+        public IActionResult Logout()
+        {
+            // clear session
+            HttpContext.Session.Remove("JWTToken");
+            HttpContext.Session.Remove("Email");
+            HttpContext.Session.Remove("Role");
+            HttpContext.Session.Remove("User_Id");
 
+            return RedirectToAction("Login", "Auth"); // back to login
+
+        }
+
+
+        public IActionResult NotFoundPage()
+        {
+
+            return View();
+        }
 
     }
 }

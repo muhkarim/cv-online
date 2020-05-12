@@ -48,6 +48,10 @@ namespace CVOnline.ViewModels
         public string YearOfResign { get; set; }
         public string LastSalary { get; set; }
 
+        public string Email { get; set; }
+
+        public string Status { get; set; }
+
     }
 
     

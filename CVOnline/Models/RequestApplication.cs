@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CVOnline.Bases;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace CVOnline.Models
 {
     [Table("TB_T_RequestApplication")]
-    public class RequestApplication
+    public class RequestApplication : IEntity
     {
         [Key]
         public int Id { get; set; }

@@ -15,7 +15,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     @*<link rel="icon" type="image/png" sizes="16x16" href="~/Content/Mini AdminPro/assets/images/favicon.png">*@
-    <title>BELAJAR ASP.NET MVC</title>
+    <title>CV Online</title>
     <!-- Bootstrap Core CSS -->
     <link href="~/Mini AdminPro/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -87,11 +87,11 @@
                         end cut -->
                         <!-- ################# -->
                         <li class="nav-item">
-                            <a href="@Url.Action( "Index", "Home")" class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark">
-                                Home
+                            <a href="@Url.Action( "Index", "UserApplicants")" class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark">
+                                Complete your data
                             </a>
                         </li>
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a href="@Url.Action( "About", "Home")" class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark">
                                 About
                             </a>
@@ -100,7 +100,7 @@
                             <a href="@Url.Action( "Contact", "Home")" class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark">
                                 Contact
                             </a>
-                        </li>
+                        </li>*@
 
                         <!-- ################# -->
                         <!-- ============================================================== -->
@@ -173,36 +173,32 @@
                 </div>
                 <!-- End User profile text-->
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav" >
+                <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="hide-nav">
                         <li class="nav-small-cap">Dashboard</li>
 
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li>
-                                <a class="" href="@Url.Action( "Index", "Role")" aria-expanded="false"><i class="mdi mdi-account-box-outline"></i><span class="hide-menu">Role</span></a>
-                            </li>
-                            <li>
-                                <a class="" href="@Url.Action( "Index", "Supplier")" aria-expanded="false"><i class="mdi mdi-account-star"></i><span class="hide-menu">Supplier</span></a>
-                            </li>
-
-                        }
-
-                        @if (User.Identity.IsAuthenticated && User.IsInRole("Employee"))
-                        {
-                            <li>
-                                <a class="" href="@Url.Action( "Index", "TodoListItems")" aria-expanded="false"><i class="mdi mdi-format-list-checks"></i><span class="hide-menu">Todolist</span></a>
-                            </li>
-
-                        }
 
 
-                        <li>
-                            <a class="" href="@Url.Action( "Index", "Department")" aria-expanded="false"><i class="mdi mdi-new-box"></i><span class="hide-menu">Department</span></a>
+
+                        <li id="hide-menu-jobs">
+                            <a class="" href="@Url.Action( "Index", "Jobs")" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span class="hide-menu">Management Jobs</span></a>
                         </li>
-                        <li>
-                            <a class="" href="@Url.Action( "Index", "Employee")" aria-expanded="false"><i class="mdi mdi-account-plus"></i><span class="hide-menu">Employee</span></a>
+                        <li id="hide-menu-users">
+                            <a class="" href="@Url.Action( "Index", "Users")" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Management Users</span></a>
                         </li>
+                        <li id="hide-menu-requests">
+                            <a class="" href="@Url.Action( "Index", "Requests")" aria-expanded="false"><i class="mdi  mdi-checkbox-multiple-marked-outline"></i><span class="hide-menu">Request Applicant</span></a>
+                        </li>
+                        <li id="hide-menu-joblist">
+                            <a class="" href="@Url.Action( "Index", "JobsList")" aria-expanded="false"><i class="mdi  mdi-clipboard-text"></i><span class="hide-menu">Karier</span></a>
+                        </li>
+                        <li id="hide-menu-myprofile">
+                            <a class="" href="@Url.Action( "MyProfile", "UserApplicants")" aria-expanded="false"><i class="mdi  mdi-account-circle"></i><span class="hide-menu">My Profile</span></a>
+                        </li>
+                        @*<li id="hide-menu-inputprofile">
+                            <a class="" href="@Url.Action( "Index", "UserApplicants")" aria-expanded="false"><i class="mdi  mdi-comment-account-outline"></i><span class="hide-menu">Cpmplete your data</span></a>
+                        </li>*@
+
                     </ul>
 
                 </nav>
@@ -215,7 +211,7 @@
                 <!-- item-->
                 <a></a>
                 <!-- item-->
-                <form method="post" action="@Url.Action( "Logout", "Account")" id="logoutForm">
+                <form method="post" action="@Url.Action( "Logout", "Auth")" id="logoutForm">
                     <a href="javascript:document.getElementById('logoutForm').submit()" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
                 </form>
                 <!-- item-->
@@ -301,6 +297,10 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <!-- end - This is for export functionality only -->
+
+    <script src="~/Mini AdminPro/assets/plugins/wizard/jquery.steps.min.js"></script>
+    <script src="~/Mini AdminPro/assets/plugins/wizard/jquery.validate.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
 
 

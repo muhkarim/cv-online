@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using CVOnline.Models;
 using CVOnline.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -21,11 +22,22 @@ namespace Client.Controllers
 
         public IActionResult Index()
         {
-            return View(LoadUsers());
+
+            var role = HttpContext.Session.GetString("Role");
+            if (role == "Admin")
+            {
+                return View(LoadUsers());
+            }
+
+            return RedirectToAction("NotFoundPage", "Auth");
+
+
         }
 
         public JsonResult LoadUsers()
         {
+            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
+
             IEnumerable<User> user = null;
            
             var responseTask = client.GetAsync("Users"); 
@@ -46,7 +58,8 @@ namespace Client.Controllers
 
         public JsonResult InsertOrUpdate(User user)
         {
-            
+            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
+
             var myContent = JsonConvert.SerializeObject(user);
             var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
             var byteContent = new ByteArrayContent(buffer);
@@ -65,6 +78,7 @@ namespace Client.Controllers
 
         public JsonResult GetById(int Id)
         {
+            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
 
             UserVM userVM = null;
             var responseTask = client.GetAsync("Users/" + Id); 
@@ -85,6 +99,7 @@ namespace Client.Controllers
 
         public JsonResult Delete(int Id)
         {
+            //client.DefaultRequestHeaders.Add("Authorization", HttpContext.Session.GetString("JWTToken"));
 
             var result = client.DeleteAsync("Users/" + Id).Result;
             return Json(result);

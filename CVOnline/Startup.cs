@@ -43,9 +43,9 @@ namespace CVOnline
             services.AddScoped<WorkExperienceRepository>();
             services.AddScoped<DocumentRepository>();
             services.AddScoped<ApplicantRepository>();
+            services.AddScoped<RequestRepository>();
 
-
-
+   
 
             // add authorize middleware in API
             services.AddAuthentication(option => {
@@ -72,6 +72,7 @@ namespace CVOnline
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

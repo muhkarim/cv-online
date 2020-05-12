@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/Layout.cshtml";
+}
+
+
+<h2>Job List</h2>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Job_Id">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">JobName : </label>
+                        <input type="text" class="form-control" id="JobName" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">DueDate : </label>
+                        <input type="text" class="form-control" id="DueDate" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Requirements : </label>
+                        <textarea class="form-control" id="Requirements" rows="4" cols="50" disabled></textarea>
+                        @*<input type="text" class="form-control" id="Requirements" disabled>*@
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                <button type="button" class="btn btn-primary" onclick="Apply()" id="Apply">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @*<div class="card" style="width: 18rem;" id="card-job">
+        <div class="card-body">
+            <h5 class="card-title" id="title">Card title</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+            <a href="#" class="card-link" id="detail" onclick="GetJobById()">Detail Jobs</a>
+        </div>
+    </div>*@
+
+    <main class="cards">
+        <div id="test12"></div>
+    </main>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/JobsListScript.js"></script>
+    
+}

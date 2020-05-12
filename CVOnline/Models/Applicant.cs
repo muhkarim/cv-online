@@ -1,4 +1,5 @@
 ﻿using CVOnline.Bases;
+using Org.BouncyCastle.Ocsp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -28,6 +29,8 @@ namespace CVOnline.Models
         public int WorkExperience_Id { get; set; }
         public WorkExperience WorkExperience { get; set; }
 
-        public IList<UserRequest> UserRequests { get; set; }
+        //public IList<UserRequest> UserRequests { get; set; }
+
+        public IList<Request> Requests { get; set; } //collection navigation property
     }
 }

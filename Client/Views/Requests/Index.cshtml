@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Layouts/Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div class="row page-titles">
+    <div class="col-md-6 col-8 align-self-center">
+        <h3 class="text-themecolor m-b-0 m-t-0">Table Data table</h3>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+            <li class="breadcrumb-item active"> @ViewBag.Title</li>
+        </ol>
+    </div>
+
+    @*<div class="col-md-6 col-4 align-self-center">
+        <button id="btncreate" data-toggle="modal" data-target="#exampleModal" class="btn pull-right hidden-sm-down btn-success"><i class="mdi mdi-plus-circle"></i> Create New</button>
+    </div>*@
+
+
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Data Request</h4>
+                <div class="table-responsive m-t-40">
+                    <!--table -->
+                    <table id="rt" class="display nowrap table table-hover table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>First Name</th>
+                                <th>Lastname</th>
+                                <th>Status</th>
+                                <th>Apply Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Create New</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Id">
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Id Card : </label>
+                        <input placeholder="Number Of Id Card" class="form-control" id="IdCard">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">First Name : </label>
+                        <input placeholder="First Name" class="form-control" id="FirstName">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Last Name : </label>
+                        <input placeholder="Last Name" class="form-control" id="LastName">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Place Of Date : </label>
+                        <input placeholder="Place Of Date" class="form-control" id="PlaceOfDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Birth Date : </label>
+                        <input type="date" placeholder="Birth Date" class="form-control" id="BirthDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Gender : </label>
+                        <select name="gender" class="form-control" id="Gender">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Religion : </label>
+                        <select name="Religion" class="form-control" id="Religion">
+                            <option value="Islam">Islam</option>
+                            <option value="Katolik">Katolik</option>
+                            <option value="Protestan">Protestan</option>
+                            <option value="Budha">Budha</option>
+                            <option value="Hindu">Hindu</option>
+                            <option value="Khonghucu">Khonghucu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Phone Number : </label>
+                        <input placeholder="Phone Number" class="form-control" name="PhoneNumber" id="PhoneNumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Address : </label>
+                        <input placeholder="Address" name="Address" class="form-control" id="Address">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Marital Status : </label>
+                        <select name="MaritalStatus" class="form-control" id="MaritalStatus">
+                            <option value="Single">Single</option>
+                            <option value="Menikah">Menikah</option>
+                            <option value="Duda">Duda</option>
+                            <option value="Janda">Janda</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>*@
+                <button type="button" class="btn btn-primary" onclick="ApproveJobs()" id="ApproveJobs">Approve Jobs</button>
+                <button type="button" class="btn btn-warning" onclick="DeclineJobs()" id="DeclineJobs">Decline Jobs</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/RequestScript.js"></script>
+}
+
+

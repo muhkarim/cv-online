@@ -13,25 +13,33 @@ $(document).ready(function () {
             { "searchable": false, "targets": 2 }
         ],
         "columns": [
+            {
+                data: null, render: function (data, type, row, meta) {
+                    return meta.row + meta.settings._iDisplayStart + 1;
+                }
+            },
             { "data": "email" },
-            { "data": "password" },
             {
                 data: null, render: function (data, type, row) {
-                    return '<button type="button" class="btn btn-warning" id="BtnEdit" data-toggle="tooltip" data-placement="top" title="Edit" onclick="return GetById(' + row.id + ')"><i class="mdi mdi-pencil"></i></button> &nbsp; <button type="button" class="btn btn-danger" id="BtnDelete" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return Delete(' + row.id + ')"><i class="mdi mdi-delete"></i></button>';
+                    return '<button type="button" class="btn btn-danger" id="BtnDelete" data-toggle="tooltip" data-placement="top" title="Delete" onclick="return Delete(' + row.id + ')"><i class="mdi mdi-delete"></i></button>';
                 }
             }
         ]
     });
+
+    HideSidebar();
 });
 
 
 
 function Save() {
+    debugger;
     var User = new Object();
     User.Email = $('#Email').val();
     User.Password = $('#Password').val();
 
     if ($('#Email').val() == "") {
+        debugger;
         Swal.fire({
             icon: 'info',
             title: 'Require',
@@ -39,6 +47,7 @@ function Save() {
         })
         return false;
     } else {
+        debugger;
         $.ajax({
             type: 'POST',
             url: '/Users/InsertOrUpdate/',
@@ -178,3 +187,10 @@ document.getElementById("btncreate").addEventListener("click", function () {
     $('#Save').show();
     $('#Update').hide();
 });
+
+function HideSidebar() {
+    $('#hide-menu-myprofile').hide();
+    $('#hide-menu-joblist').hide();
+    $('#hide-menu-inputprofile').hide();
+
+}

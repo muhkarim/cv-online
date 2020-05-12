@@ -6,10 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\RequestApplicationsController.cs" />
+    <Compile Remove="Controllers\UserRequestsController.cs" />
     <Compile Remove="Migrations\20200430075636_add_model_workexperience.cs" />
     <Compile Remove="Migrations\20200430075636_add_model_workexperience.Designer.cs" />
     <Compile Remove="Migrations\20200501065725_add_model_all.cs" />
     <Compile Remove="Migrations\20200501065725_add_model_all.Designer.cs" />
+    <Compile Remove="Models\RequestApplication.cs" />
+    <Compile Remove="Models\UserRequest.cs" />
+    <Compile Remove="Repositories\Data\RequestApplicationRepository.cs" />
+    <Compile Remove="Repositories\Data\UserRequestRepository.cs" />
   </ItemGroup>
 
   <ItemGroup>

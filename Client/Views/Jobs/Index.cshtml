@@ -27,20 +27,15 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Data Export</h4>
-                <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
-                <div class="dt-buttons">
-                    <a href="@Url.Action( "convertToCSV", "Department")" class="dt-button buttons-csv buttons-html5" tabindex="0" aria-controls="example23"><span>CSV</span></a>
-                    <a href="@Url.Action( "convertToExcel", "Department")" class="dt-button buttons-excel buttons-html5" tabindex="0" aria-controls="example23"><span>Excel</span></a>
-                    <a href="@Url.Action( "Report", "Department")" class="dt-button buttons-pdf buttons-html5" tabindex="0" aria-controls="example23"><span>PDF</span></a>
-                </div>
-
+                <h4 class="card-title">Data Jobs</h4>
                 <div class="table-responsive m-t-40">
                     <!--table -->
                     <table id="jt" class="display nowrap table table-hover table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Job Name</th>
+                                <th>Requirements</th>
                                 <th>Status</th>
                                 <th>Due Date</th>
                                 <th>Action</th>
@@ -64,33 +59,58 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Create New Department</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add New Jobs</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="Id">
                     </div>
                     <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Department Name : </label>
-                        <input type="text" class="form-control" id="Name">
+                        <input type="hidden" class="form-control" id="isActive">
                     </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Job Name : </label>
+                        <input type="text" class="form-control" id="JobName">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Due Date : </label>
+                        <input type="date" class="form-control" id="DueDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Status : </label>
+                        <select id="isActive" class="form-control">
+                            <option value=true>Aktif</option>
+                            <option value=false>Non Aktif</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Requirements : </label>
+                        <textarea rows="4" cols="50" class="form-control" id="Requirements"></textarea>
+                    </div>
+                    @*<div class="form-group">
+            <label for="recipient-name" class="col-form-label">Status : </label>
+            <select id="isActive" class="form-control">
+                <option value="True">Aktif</option>
+                <option value="False">Nonaktif</option>
+            </select>
+        </div>*@
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="Save()" id="Save">Save</button>
-                <button type="button" class="btn btn-warning" onclick="Edit()" id="Update">Update</button>
+                <button type="button" class="btn btn-primary" onclick="Save()" data-dismiss="modal" id="SaveBtn">Save</button>
+                <button type="button" class="btn btn-warning" onclick="Edit()" data-dismiss="modal" id="UpdateBtn">Update</button>
             </div>
         </div>
     </div>
 </div>
 
 @section Scripts{
-    <script src="~/Scripts/JobScripts.js"></script>
+
+    <script src="~/Scripts/JobsScript.js"></script>
 }
 

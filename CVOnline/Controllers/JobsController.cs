@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using CVOnline.Bases;
 using CVOnline.Models;
 using CVOnline.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CVOnline.Controllers
 {
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class JobsController : BasesController<Job, JobRepository>

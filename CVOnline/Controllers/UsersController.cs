@@ -13,6 +13,7 @@ using CVOnline.Repositories.Data;
 using CVOnline.ViewModels;
 using Dapper;
 using DevOne.Security.Cryptography.BCrypt;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,6 +22,7 @@ using Org.BouncyCastle.Crypto.Generators;
 
 namespace CVOnline.Controllers
 {
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -115,8 +117,10 @@ namespace CVOnline.Controllers
                     //  create jwt
                     var claims = new[] {
                     new Claim("Email", model.Email),
-                    new Claim("Role", model.RoleName)
-                    
+                    new Claim("RoleName", model.RoleName),
+                    new Claim("User_Id", getEmail.Id.ToString())
+
+
                 };
 
                     var signinKey = new SymmetricSecurityKey(

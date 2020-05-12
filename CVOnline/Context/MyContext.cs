@@ -18,9 +18,9 @@ namespace CVOnline.Context
         public DbSet<Biodata> Biodatas { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<EducationalDetails> EducationalDetails { get; set; }
-        public DbSet<UserRequest> UserRequests { get; set; }
+        //public DbSet<UserRequest> UserRequests { get; set; }
         public DbSet<WorkExperience> WorkExperiences { get; set; }
-        public DbSet<RequestApplication> RequestApplications { get; set; }
+        //public DbSet<RequestApplication> RequestApplications { get; set; }
         public DbSet<UserRole> UserRole { get; set; }
         public DbSet<Admin> Admins { get; set; }
 
@@ -69,22 +69,35 @@ namespace CVOnline.Context
                 .WithOne(x => x.Admin)
                 .HasForeignKey<Admin>(x => x.User_Id);
 
-            modelBuilder.Entity<UserRequest>().HasKey(x => new { x.Applicants_Id, x.RequestApplication_Id });
-            modelBuilder.Entity<UserRequest>()
-                .HasOne(x => x.Applicant)
-                .WithMany(x => x.UserRequests)
-                .HasForeignKey(x => x.Applicants_Id);
+            //modelBuilder.Entity<UserRequest>().HasKey(x => new { x.Applicants_Id, x.RequestApplication_Id });
+            //modelBuilder.Entity<UserRequest>()
+            //    .HasOne(x => x.Applicant)
+            //    .WithMany(x => x.UserRequests)
+            //    .HasForeignKey(x => x.Applicants_Id);
 
             // 1 to Many Request : List
-            modelBuilder.Entity<UserRequest>()
-                .HasOne(x => x.RequestApplication)
-                .WithMany(x => x.UserRequests)
-                .HasForeignKey(x => x.RequestApplication_Id);
+            //modelBuilder.Entity<UserRequest>()
+            //    .HasOne(x => x.RequestApplication)
+            //    .WithMany(x => x.UserRequests)
+            //    .HasForeignKey(x => x.RequestApplication_Id);
 
             modelBuilder.Entity<Applicant>()
                 .HasOne<WorkExperience>(x => x.WorkExperience)
                 .WithOne(x => x.Applicant)
                 .HasForeignKey<Applicant>(x => x.WorkExperience_Id);
+
+
+           // relation request between jobs and applicants
+
+            modelBuilder.Entity<Request>()
+                .HasOne(x => x.Jobs)
+                .WithMany(x => x.Requests)
+                .HasForeignKey(x => x.Jobs_Id);
+
+            modelBuilder.Entity<Request>()
+                .HasOne(x => x.Applicant)
+                .WithMany(x => x.Requests)
+                .HasForeignKey(x => x.Applicants_Id);
 
         }
     }
